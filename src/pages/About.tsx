@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 
 const About = () => {
@@ -11,30 +10,21 @@ const About = () => {
             <span className="text-club-primary">About</span> Our Club
           </h1>
           <div className="mt-2 h-1 w-24 bg-club-primary"></div>
-          <div className="mt-12 grid gap-12 md:grid-cols-2">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">WE ARE THE MEDIA CLUB OF BHAGALPUR COLLEGE OF ENGINEERING</h2>
-              <p className="mt-4 text-gray-600">
-                This is the BCE Bhagalpur's official Club. The aim of the club is to showcase all the events, 
-                club activities, talents and college life at BCE Bhagalpur. It is a soul initiative of 
-                Campus TV and Radio Club (Frontiers) of Bhagalpur College Of Engineering. 
-              </p>
-              <p className="mt-4 text-gray-600">
-                Our club provides a platform for students to explore and develop skills in media 
-                production, broadcasting, content creation, and technical operation of audio-visual equipment.
-              </p>
-              <p className="mt-4 text-gray-600">
-                We produce original video series, conduct interviews with distinguished alumni, 
-                document campus events, and provide radio broadcasting services for the campus community.
-              </p>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/public/lovable-uploads/bd1d6c22-6b93-4787-a9c2-9b409a4ef859.png" 
-                alt="Campus TV and Radio Club Members" 
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-gray-900">WE ARE THE MEDIA CLUB OF BHAGALPUR COLLEGE OF ENGINEERING</h2>
+            <p className="mt-4 text-gray-600">
+              This is the BCE Bhagalpur's official Club. The aim of the club is to showcase all the events, 
+              club activities, talents and college life at BCE Bhagalpur. It is a soul initiative of 
+              Campus TV and Radio Club (Frontiers) of Bhagalpur College Of Engineering. 
+            </p>
+            <p className="mt-4 text-gray-600">
+              Our club provides a platform for students to explore and develop skills in media 
+              production, broadcasting, content creation, and technical operation of audio-visual equipment.
+            </p>
+            <p className="mt-4 text-gray-600">
+              We produce original video series, conduct interviews with distinguished alumni, 
+              document campus events, and provide radio broadcasting services for the campus community.
+            </p>
           </div>
         </div>
 
