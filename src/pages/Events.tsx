@@ -58,7 +58,7 @@ const Events = () => {
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Time: {event.time}</span>
                 <Button asChild variant="secondary" size="sm">
-                  <Link to={`/event/${event.id}`}>Learn More</Link>
+                  <Link to="/events">View Details</Link>
                 </Button>
               </div>
             </CardContent>
