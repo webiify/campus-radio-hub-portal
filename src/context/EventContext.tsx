@@ -8,6 +8,8 @@ export interface Event {
   description: string;
   date: Date;
   isActive: boolean;
+  location: string; // Added location property
+  time: string;    // Added time property
 }
 
 interface EventContextType {
@@ -16,6 +18,7 @@ interface EventContextType {
   addEvent: (event: Omit<Event, 'id'>) => void;
   updateEvent: (id: string, event: Partial<Event>) => void;
   deleteEvent: (id: string) => void;
+  fetchEvents: () => Promise<void>; // Added fetchEvents method
 }
 
 const EventContext = createContext<EventContextType | undefined>(undefined);
@@ -43,6 +46,8 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         title: 'Annual Tech Fest 2025',
         description: 'Join us for the annual tech fest with exciting competitions, workshops, and talks.',
         date: new Date(2025, 4, 15), // May 15, 2025
+        location: 'University Main Hall',
+        time: '10:00 AM - 5:00 PM',
         isActive: true
       }
     ];
@@ -71,6 +76,12 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [events]);
 
+  const fetchEvents = async (): Promise<void> => {
+    // In a real application, this would be an API call
+    // For now, we'll just use the events from localStorage
+    return Promise.resolve();
+  };
+
   const addEvent = (event: Omit<Event, 'id'>) => {
     const newEvent = {
       ...event,
@@ -93,7 +104,7 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <EventContext.Provider value={{ events, currentEvent, addEvent, updateEvent, deleteEvent }}>
+    <EventContext.Provider value={{ events, currentEvent, addEvent, updateEvent, deleteEvent, fetchEvents }}>
       {children}
     </EventContext.Provider>
   );
