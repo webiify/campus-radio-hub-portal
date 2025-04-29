@@ -1,5 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { EventContext } from '../context/EventContext';
+
+import React, { useState, useEffect } from 'react';
+import { useEventContext } from '../context/EventContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarIcon, MapPinIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 
 const Events = () => {
-  const { events, fetchEvents } = useContext(EventContext);
+  const { events, fetchEvents } = useEventContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

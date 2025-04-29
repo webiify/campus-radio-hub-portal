@@ -1,13 +1,15 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/use-theme";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
 
   const links = [
     { href: "/", label: "HOME" },
@@ -37,6 +39,10 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -61,7 +67,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+          <nav className="hidden md:flex items-center space-x-6">
             <ul className="flex space-x-6">
               {links.map((link) => (
                 <li key={link.href}>
@@ -71,17 +77,38 @@ const Navbar = () => {
                       location.pathname === link.href
                         ? "text-club-primary"
                         : "text-white"
-                    }`}
+                    } hover:scale-105 inline-block`}
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
+            
+            {/* Theme Toggle Button */}
+            <Button 
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme} 
+              className="ml-2 text-white hover:bg-white/10 hover:text-club-primary"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
           </nav>
 
           {/* Mobile Navigation Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            <Button 
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme} 
+              className="mr-2 text-white hover:bg-transparent hover:text-club-primary"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+            
             <Button
               variant="ghost"
               className="text-white hover:bg-transparent hover:text-club-primary"

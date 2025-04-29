@@ -16,34 +16,37 @@ import SemesterContent from "./pages/SemesterContent";
 import NotFound from "./pages/NotFound";
 import { EventProvider } from "./context/EventContext";
 import { SubscriptionProvider } from "./context/SubscriptionContext";
+import { ThemeProvider } from "./hooks/use-theme";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <EventProvider>
-        <SubscriptionProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="gallery" element={<Gallery />} />
-                <Route path="activities" element={<Activities />} />
-                <Route path="events" element={<Events />} />
-                <Route path="study-material" element={<StudyMaterial />} />
-                <Route path="study-material/:semester" element={<SemesterContent />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </SubscriptionProvider>
-      </EventProvider>
-    </TooltipProvider>
+    <ThemeProvider defaultTheme="light">
+      <TooltipProvider>
+        <EventProvider>
+          <SubscriptionProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="gallery" element={<Gallery />} />
+                  <Route path="activities" element={<Activities />} />
+                  <Route path="events" element={<Events />} />
+                  <Route path="study-material" element={<StudyMaterial />} />
+                  <Route path="study-material/:semester" element={<SemesterContent />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </SubscriptionProvider>
+        </EventProvider>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

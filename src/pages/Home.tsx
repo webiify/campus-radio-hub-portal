@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SubscribeForm } from "@/components/SubscribeForm";
@@ -21,13 +22,19 @@ const Home = () => {
         <div className="absolute inset-0 bg-overlay"></div>
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
           <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            <span className="block text-club-primary">Campus TV and Radio Club</span>
-            <span className="block">BCE BHAGALPUR</span>
+            <div className="overflow-hidden">
+              <span className="block text-club-primary animate-fadeIn inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-club-primary after:origin-left after:scale-x-100">
+                Campus TV and Radio Club
+              </span>
+            </div>
+            <div className="overflow-hidden mt-2">
+              <span className="block animate-slideUp inline-block" style={{ animationDelay: '0.3s' }}>BCE BHAGALPUR</span>
+            </div>
           </h1>
-          <p className="mb-8 max-w-3xl text-lg opacity-90">
+          <p className="mb-8 max-w-3xl text-lg opacity-90 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
             Showcasing campus events, activities, and talent through media, broadcasting, and creative content.
           </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 animate-fadeIn" style={{ animationDelay: '0.9s' }}>
             <Button asChild className="bg-club-primary text-white hover:bg-club-secondary">
               <Link to="/about">Know more about the club</Link>
             </Button>
