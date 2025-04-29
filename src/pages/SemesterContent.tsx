@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { FileIcon, Download } from "lucide-react";
+import { FileIcon, Download, Upload } from "lucide-react";
 
 // Define the branches
 const branches = [
@@ -14,6 +14,12 @@ const branches = [
   { id: "ee", name: "Electrical Engineering (EE)" },
   { id: "ce", name: "Civil Engineering" }
 ];
+
+// Define the upload URLs (for admin use)
+const uploadUrls = {
+  questionPapers: "https://forms.gle/exampleQuestionPaperUploadForm",
+  notes: "https://forms.gle/exampleNotesUploadForm"
+};
 
 // Define mock data for question papers
 const questionPapers = {
@@ -73,6 +79,7 @@ const notes = {
 const SemesterContent = () => {
   const { semester } = useParams<{ semester: string }>();
   const [selectedBranch, setSelectedBranch] = useState("cse");
+  const [showAdminLinks, setShowAdminLinks] = useState(false);
   
   if (!semester) {
     return (
@@ -91,21 +98,74 @@ const SemesterContent = () => {
     alert(`Downloading ${fileType}: ${fileName}`);
   };
 
+  // Toggle admin links visibility
+  const toggleAdminLinks = () => {
+    setShowAdminLinks(!showAdminLinks);
+  };
+
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Back Button */}
-        <div className="mb-8 flex items-center">
-          <Button asChild variant="outline" className="mr-4">
-            <Link to="/study-material">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mr-2 h-5 w-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-              </svg>
-              Back to Study Material
-            </Link>
+        <div className="mb-8 flex items-center justify-between">
+          <div className="flex items-center">
+            <Button asChild variant="outline" className="mr-4">
+              <Link to="/study-material">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mr-2 h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                Back to Study Material
+              </Link>
+            </Button>
+            <h1 className="text-3xl font-bold text-gray-900">Semester {semesterNumber} Resources</h1>
+          </div>
+          
+          {/* Admin button - double click to reveal upload links */}
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-gray-400 hover:text-gray-600"
+            onDoubleClick={toggleAdminLinks}
+          >
+            Admin
           </Button>
-          <h1 className="text-3xl font-bold text-gray-900">Semester {semesterNumber} Resources</h1>
         </div>
+        
+        {/* Admin Upload Links (hidden by default) */}
+        {showAdminLinks && (
+          <div className="mb-6 rounded-lg border border-dashed border-gray-300 bg-gray-50 p-4">
+            <h3 className="mb-2 text-lg font-semibold text-gray-900">Admin Upload Links</h3>
+            <div className="space-y-2">
+              <div className="flex items-center">
+                <Upload className="mr-2 h-4 w-4 text-gray-500" />
+                <span className="mr-2 text-sm text-gray-700">Upload Question Papers:</span>
+                <a 
+                  href={uploadUrls.questionPapers} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  {uploadUrls.questionPapers}
+                </a>
+              </div>
+              <div className="flex items-center">
+                <Upload className="mr-2 h-4 w-4 text-gray-500" />
+                <span className="mr-2 text-sm text-gray-700">Upload Notes:</span>
+                <a 
+                  href={uploadUrls.notes} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  {uploadUrls.notes}
+                </a>
+              </div>
+            </div>
+            <p className="mt-2 text-xs text-gray-500">
+              These links are for administrators only. Please use the appropriate form to upload materials for each category.
+            </p>
+          </div>
+        )}
 
         {/* Branch Selection */}
         <div className="mb-8 overflow-x-auto">
@@ -221,9 +281,18 @@ const SemesterContent = () => {
               If you have notes, question papers, or other study materials to contribute, please share them with us.
               Your contribution helps your fellow students!
             </p>
-            <Button asChild className="mt-6 bg-white text-club-dark hover:bg-gray-100">
-              <Link to="/contact">Contact to Share Materials</Link>
-            </Button>
+            <div className="mt-6 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+              <Button asChild className="w-full bg-white text-club-dark hover:bg-gray-100 sm:w-auto">
+                <a href={uploadUrls.questionPapers} target="_blank" rel="noopener noreferrer">
+                  Upload Question Papers
+                </a>
+              </Button>
+              <Button asChild className="w-full bg-white text-club-dark hover:bg-gray-100 sm:w-auto">
+                <a href={uploadUrls.notes} target="_blank" rel="noopener noreferrer">
+                  Upload Notes
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
