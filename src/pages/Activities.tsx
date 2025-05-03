@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 // Define activities
 const activities = [
@@ -94,6 +95,21 @@ const seriesContent = [
 ];
 
 const Activities = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,33 +122,55 @@ const Activities = () => {
         {/* Main Activities */}
         <div className="mb-20">
           <h2 className="mb-8 text-3xl font-bold text-gray-900">Core Activities</h2>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {activities.map(activity => (
-              <Card key={activity.id} className="overflow-hidden transition-all hover:shadow-lg">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={activity.image} 
-                    alt={activity.title} 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">{activity.title}</h3>
-                  <p className="mb-4 text-gray-600">{activity.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {activity.skills.map((skill, index) => (
-                      <span 
-                        key={index} 
-                        className="rounded-full bg-club-primary/10 px-3 py-1 text-xs font-medium text-club-dark"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {activities.map((activity, index) => (
+              <motion.div
+                key={activity.id}
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -15,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                animate={{ 
+                  y: [0, -10, 0], 
+                  transition: { 
+                    repeat: Infinity, 
+                    duration: 4 + index * 0.5, 
+                    ease: "easeInOut" 
+                  } 
+                }}
+              >
+                <Card className="overflow-hidden transition-all duration-500 hover:shadow-xl bg-gradient-to-b from-white to-blue-50">
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={activity.image} 
+                      alt={activity.title} 
+                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
                   </div>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-6">
+                    <h3 className="mb-2 text-xl font-bold text-blue-900">{activity.title}</h3>
+                    <p className="mb-4 text-gray-600">{activity.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {activity.skills.map((skill, index) => (
+                        <span 
+                          key={index} 
+                          className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-700"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Sessions for Juniors */}
@@ -140,23 +178,39 @@ const Activities = () => {
           <h2 className="mb-8 text-3xl font-bold text-gray-900">Our Sessions for Juniors</h2>
           <p className="mb-6 text-gray-600">Workshops are regularly organised by the club for the new comers to learn about Photo editing, Video Editing, Graphic Design, and many more.</p>
           
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {sessions.map(session => (
-              <Card key={session.id} className="overflow-hidden transition-all hover:shadow-lg">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={session.image} 
-                    alt={session.title} 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">{session.title}</h3>
-                  <p className="text-gray-600">{session.description}</p>
-                </CardContent>
-              </Card>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {sessions.map((session) => (
+              <motion.div
+                key={session.id}
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -10,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+              >
+                <Card className="overflow-hidden transition-all hover:shadow-xl bg-gradient-to-b from-white to-blue-50">
+                  <div className="aspect-video overflow-hidden">
+                    <motion.img 
+                      src={session.image} 
+                      alt={session.title} 
+                      className="h-full w-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="mb-2 text-xl font-bold text-blue-900">{session.title}</h3>
+                    <p className="text-gray-600">{session.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Exclusive Series */}
@@ -164,41 +218,68 @@ const Activities = () => {
           <h2 className="mb-8 text-3xl font-bold text-gray-900">Our Exclusive Series</h2>
           <p className="mb-6 text-gray-600">These are our exclusive series. Select to watch on YouTube.</p>
           
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {seriesContent.map(series => (
-              <Card key={series.id} className="overflow-hidden transition-all hover:shadow-lg">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={series.image} 
-                    alt={series.title} 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">{series.title}</h3>
-                  <p className="mb-4 text-gray-600">{series.description}</p>
-                  <Button className="bg-club-primary text-white hover:bg-club-secondary">
-                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                      Watch on YouTube
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {seriesContent.map((series) => (
+              <motion.div
+                key={series.id}
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.03,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+              >
+                <Card className="overflow-hidden transition-all hover:shadow-xl bg-gradient-to-b from-white to-blue-50">
+                  <div className="aspect-video overflow-hidden">
+                    <motion.img 
+                      src={series.image} 
+                      alt={series.title} 
+                      className="h-full w-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="mb-2 text-xl font-bold text-blue-900">{series.title}</h3>
+                    <p className="mb-4 text-gray-600">{series.description}</p>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:from-blue-700 hover:to-blue-900">
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                          Watch on YouTube
+                        </a>
+                      </Button>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* CTA Section */}
-        <div className="rounded-lg bg-gradient-to-r from-club-dark to-club-secondary p-8 text-white">
+        <div className="rounded-lg bg-gradient-to-r from-blue-700 to-blue-500 p-8 text-white">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold">Interested in joining our club?</h2>
             <p className="mt-4 text-lg opacity-90">
               We're always looking for passionate students to join our team. Whether you're interested in 
               video production, radio broadcasting, photography, or content creation, there's a place for you!
             </p>
-            <Button asChild className="mt-6 bg-white text-club-dark hover:bg-gray-100">
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button asChild className="mt-6 bg-white text-blue-700 hover:bg-blue-50">
+                <Link to="/contact">Contact Us</Link>
+              </Button>
+            </motion.div>
           </div>
         </div>
       </div>

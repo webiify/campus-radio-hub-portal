@@ -64,11 +64,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				club: {
-					primary: '#4F46E5',
-					secondary: '#8B5CF6',
-					dark: '#1E1B4B',
-					light: '#F5F3FF',
-					accent: '#C026D3',
+					primary: '#2563EB',
+					secondary: '#0EA5E9',
+					dark: '#1E3A8A',
+					light: '#EFF6FF',
+					accent: '#0EA5E9',
 				}
 			},
 			borderRadius: {
@@ -121,7 +121,7 @@ export default {
 			},
 			backgroundImage: {
 				'college-bg': "url('/public/lovable-uploads/4a4f57f5-671a-4cb0-8761-a31c77fd4d57.png')",
-				'gradient-purple': "linear-gradient(to right, #4F46E5, #8B5CF6, #C026D3)"
+				'gradient-blue': "linear-gradient(to right, #2563EB, #0EA5E9, #06B6D4)"
 			}
 		}
 	},
