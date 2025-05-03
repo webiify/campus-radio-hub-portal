@@ -116,54 +116,72 @@ const CursorEffect = () => {
           }
         }}
       >
-        {/* Outer ring */}
+        {/* Outer ring with improved animation */}
         <motion.div 
           className="absolute inset-0 rounded-full border-2 border-white"
           animate={{
-            scale: isHovering ? [1, 1.2, 1] : 1,
-            opacity: [0.6, 1, 0.6]
+            scale: [1, 1.2, 1],
+            opacity: [0.6, 1, 0.6],
+            boxShadow: [
+              "0 0 0 0 rgba(255, 255, 255, 0)",
+              "0 0 0 10px rgba(255, 255, 255, 0.2)",
+              "0 0 0 0 rgba(255, 255, 255, 0)"
+            ]
           }}
           transition={{
-            duration: 1.5,
+            duration: 2,
             repeat: Infinity,
             repeatType: "reverse"
           }}
         />
         
-        {/* Middle ring */}
+        {/* Middle ring with enhanced pulse */}
         <motion.div 
           className="absolute w-6 h-6 rounded-full border border-white"
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.8, 1, 0.8]
+            scale: [1, 1.2, 1],
+            opacity: [0.8, 1, 0.8],
+            filter: [
+              "blur(0px)",
+              "blur(1px)",
+              "blur(0px)"
+            ]
           }}
           transition={{
-            duration: 2,
+            duration: 1.5,
             repeat: Infinity,
             repeatType: "reverse",
             delay: 0.2
           }}
         />
         
-        {/* Inner dot */}
+        {/* Inner dot with dynamic color */}
         <motion.div 
           className="w-3 h-3 bg-white rounded-full"
           animate={{
             scale: isClicking ? 0.8 : [1, 0.9, 1],
+            backgroundColor: isHovering ? 
+              ["rgba(255,255,255,1)", "rgba(255,105,180,1)", "rgba(255,255,255,1)"] : 
+              "rgba(255,255,255,1)"
           }}
           transition={{
             scale: {
               duration: isClicking ? 0.1 : 1.5,
               repeat: isClicking ? 0 : Infinity,
               repeatType: "reverse"
+            },
+            backgroundColor: {
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "reverse"
             }
           }}
         />
         
-        {/* Particles effect when hovering */}
+        {/* Enhanced particles effect when hovering */}
         {isHovering && (
           <>
-            {[...Array(6)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-white rounded-full"
@@ -173,18 +191,39 @@ const CursorEffect = () => {
                   opacity: 0.8
                 }}
                 animate={{ 
-                  x: [0, (i % 2 ? 20 : -20) * Math.sin((i + 1) * Math.PI / 3)],
-                  y: [0, (i % 2 ? -20 : 20) * Math.cos((i + 1) * Math.PI / 3)],
-                  opacity: [0.8, 0]
+                  x: [0, (i % 2 ? 25 : -25) * Math.sin((i + 1) * Math.PI / 4)],
+                  y: [0, (i % 2 ? -25 : 25) * Math.cos((i + 1) * Math.PI / 4)],
+                  opacity: [0.8, 0],
+                  scale: [1, 0]
                 }}
                 transition={{ 
-                  duration: 1,
+                  duration: 0.8,
                   repeat: Infinity,
-                  delay: i * 0.1
+                  delay: i * 0.08
                 }}
               />
             ))}
           </>
+        )}
+        
+        {/* Extra trail effect */}
+        {isHovering && (
+          <motion.div
+            className="absolute inset-0 rounded-full"
+            initial={{ scale: 1, opacity: 0.3 }}
+            animate={{
+              scale: [1, 2],
+              opacity: [0.3, 0],
+            }}
+            transition={{
+              duration: 0.6,
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
+            style={{
+              border: "1px solid white"
+            }}
+          />
         )}
       </motion.div>
     </motion.div>

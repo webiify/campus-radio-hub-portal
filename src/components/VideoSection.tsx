@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Link } from 'react-router-dom';
 
 interface Video {
   id: string;
@@ -289,19 +290,46 @@ const VideoSection = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="text-center mt-10"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
             >
               <Button 
                 asChild
                 className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white border-none px-6 py-6 h-auto"
               >
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                <motion.a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2"
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-youtube">
                     <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                     <path d="m10 15 5-3-5-3z" />
                   </svg>
                   Visit Our YouTube Channel
-                </a>
+                </motion.a>
+              </Button>
+              
+              <Button 
+                asChild
+                variant="outline"
+                className="border-indigo-500 text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:border-indigo-700 dark:hover:bg-indigo-900/30 px-6 py-6 h-auto"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link to="/activities#exclusive-series" className="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 18V5l12-2v13"></path>
+                      <circle cx="6" cy="18" r="3"></circle>
+                      <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                    More Videos
+                  </Link>
+                </motion.div>
               </Button>
             </motion.div>
           </>

@@ -97,166 +97,9 @@ const Home = () => {
                 }}
                 className="relative inline-block"
               >
-                <motion.span 
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-400"
-                  animate={{
-                    textShadow: [
-                      "0 0 5px rgba(94, 234, 212, 0.3)",
-                      "0 0 15px rgba(94, 234, 212, 0.6)",
-                      "0 0 5px rgba(94, 234, 212, 0.3)"
-                    ]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    C
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.1, repeat: Infinity }}
-                  >
-                    A
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.2, repeat: Infinity }}
-                  >
-                    M
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.3, repeat: Infinity }}
-                  >
-                    P
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.4, repeat: Infinity }}
-                  >
-                    U
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
-                  >
-                    S
-                  </motion.span>
-                  &nbsp;
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.6, repeat: Infinity }}
-                  >
-                    T
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.7, repeat: Infinity }}
-                  >
-                    V
-                  </motion.span>
-                  &nbsp;
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.8, repeat: Infinity }}
-                  >
-                    A
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 0.9, repeat: Infinity }}
-                  >
-                    N
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.0, repeat: Infinity }}
-                  >
-                    D
-                  </motion.span>
-                  &nbsp;
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.1, repeat: Infinity }}
-                  >
-                    R
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.2, repeat: Infinity }}
-                  >
-                    A
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.3, repeat: Infinity }}
-                  >
-                    D
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.4, repeat: Infinity }}
-                  >
-                    I
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.5, repeat: Infinity }}
-                  >
-                    O
-                  </motion.span>
-                  &nbsp;
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.6, repeat: Infinity }}
-                  >
-                    C
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.7, repeat: Infinity }}
-                  >
-                    L
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.8, repeat: Infinity }}
-                  >
-                    U
-                  </motion.span>
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2, delay: 1.9, repeat: Infinity }}
-                  >
-                    B
-                  </motion.span>
-                </motion.span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-400">
+                  CAMPUS TV AND RADIO CLUB
+                </span>
                 <motion.span 
                   className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-teal-400 to-emerald-500"
                   initial={{ scaleX: 0, originX: 0 }}
@@ -291,42 +134,24 @@ const Home = () => {
             </motion.span>
           </motion.div>
           
-          {/* Animated slogan */}
+          {/* Add slogan with animation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.8 }}
+            transition={{ delay: 1.0, duration: 0.8 }}
             className="mt-6 mb-4"
           >
-            <motion.h2 
-              className="text-xl font-bold tracking-wider text-white"
-              animate={{ 
-                textShadow: ["0 0 5px rgba(20, 184, 166, 0.5)", "0 0 15px rgba(20, 184, 166, 0.8)", "0 0 5px rgba(20, 184, 166, 0.5)"] 
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <motion.span 
-                className="inline-block mr-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-              >
-                DISCOVER
-              </motion.span>
+            <h2 className="text-xl font-bold tracking-wider text-white">
               <motion.span
-                className="inline-block mx-2" 
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, delay: 0.5, repeat: Infinity, repeatDelay: 1 }}
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-emerald-300"
+                animate={{ 
+                  textShadow: ["0 0 5px rgba(20, 184, 166, 0.5)", "0 0 15px rgba(20, 184, 166, 0.8)", "0 0 5px rgba(20, 184, 166, 0.5)"] 
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
               >
-                DEVELOP
+                DISCOVERDEVELOPDOMINATE
               </motion.span>
-              <motion.span 
-                className="inline-block ml-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, delay: 1, repeat: Infinity, repeatDelay: 1 }}
-              >
-                DOMINATE
-              </motion.span>
-            </motion.h2>
+            </h2>
           </motion.div>
           
           {/* Animated description text */}
@@ -371,7 +196,7 @@ const Home = () => {
               <Button 
                 asChild 
                 variant="outline" 
-                className="backdrop-blur-sm bg-white/10 border-white text-white shadow-lg transition-all"
+                className="backdrop-blur-sm bg-white/20 border-white text-white shadow-lg transition-all hover:bg-white/30"
               >
                 <Link to="/study-material">
                   <motion.span
