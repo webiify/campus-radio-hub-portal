@@ -48,21 +48,25 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-gradient-to-r from-indigo-800 to-purple-800 shadow-lg backdrop-blur-sm"
-          : "bg-gradient-to-r from-indigo-900 to-purple-900"
+          ? "bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 shadow-lg backdrop-blur-sm"
+          : "bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <motion.img
-                src="/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png"
-                alt="Frontiers - Campus TV and Radio Club Logo"
-                className="h-12 w-auto"
+              <motion.div
+                className="bg-white/90 dark:bg-white/95 p-1 rounded-lg shadow-md"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              />
+              >
+                <img
+                  src="/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png"
+                  alt="Frontiers - Campus TV and Radio Club Logo"
+                  className="h-10 w-auto object-contain"
+                />
+              </motion.div>
               <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -88,13 +92,22 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-indigo-300 ${
+                    className={`text-sm font-medium transition-colors hover:text-purple-300 relative ${
                       location.pathname === link.href
-                        ? "text-indigo-300"
+                        ? "text-purple-300"
                         : "text-white"
                     } hover:scale-105 inline-block`}
                   >
                     {link.label}
+                    {location.pathname === link.href && (
+                      <motion.span
+                        layoutId="navunderline"
+                        className="absolute bottom-[-5px] left-0 w-full h-[2px] bg-purple-300"
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
                   </Link>
                 </motion.li>
               ))}
@@ -109,7 +122,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme} 
-                className="ml-2 text-white hover:bg-indigo-600/30 hover:text-indigo-200"
+                className="ml-2 text-white hover:bg-purple-800/50 hover:text-purple-200"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -123,7 +136,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme} 
-              className="mr-2 text-white hover:bg-transparent hover:text-indigo-300"
+              className="mr-2 text-white hover:bg-transparent hover:text-purple-300"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -131,7 +144,7 @@ const Navbar = () => {
             
             <Button
               variant="ghost"
-              className="text-white hover:bg-transparent hover:text-indigo-300"
+              className="text-white hover:bg-transparent hover:text-purple-300"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -143,7 +156,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div 
-          className="bg-gradient-to-r from-indigo-800 to-purple-800 md:hidden"
+          className="bg-gradient-to-r from-purple-900 to-indigo-900 md:hidden"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -158,9 +171,9 @@ const Navbar = () => {
               >
                 <Link
                   to={link.href}
-                  className={`block py-2 text-base font-medium transition-colors hover:text-indigo-300 ${
+                  className={`block py-2 text-base font-medium transition-colors hover:text-purple-300 ${
                     location.pathname === link.href
-                      ? "text-indigo-300"
+                      ? "text-purple-300"
                       : "text-white"
                   }`}
                 >

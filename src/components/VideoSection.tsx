@@ -98,6 +98,21 @@ const VideoSection = () => {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 }
   };
+  
+  const tabButtonVariants = {
+    inactive: { scale: 1 },
+    active: { 
+      scale: 1.05,
+      boxShadow: "0 4px 12px rgba(79, 70, 229, 0.3)",
+      transition: { type: "spring", stiffness: 300 }
+    },
+    hover: { 
+      scale: 1.03, 
+      backgroundColor: "rgba(79, 70, 229, 0.1)",
+      transition: { duration: 0.2 }
+    },
+    tap: { scale: 0.98 }
+  };
 
   return (
     <section className="relative py-16 overflow-hidden bg-gradient-to-b from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
@@ -165,11 +180,40 @@ const VideoSection = () => {
                 onValueChange={setActiveCategory}
                 className="w-full"
               >
-                <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg">
-                  <TabsTrigger value="all" className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">All Videos</TabsTrigger>
-                  <TabsTrigger value="college-events" className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">College Events</TabsTrigger>
-                  <TabsTrigger value="faculty-introductions" className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">Faculty Introductions</TabsTrigger>
-                  <TabsTrigger value="alumni-introductions" className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">Alumni Introductions</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-1">
+                  {[
+                    { value: "all", label: "All Videos" },
+                    { value: "college-events", label: "College Events" },
+                    { value: "faculty-introductions", label: "Faculty Introductions" },
+                    { value: "alumni-introductions", label: "Alumni Introductions" }
+                  ].map((tab) => (
+                    <motion.div
+                      key={tab.value}
+                      initial="inactive"
+                      animate={activeCategory === tab.value ? "active" : "inactive"}
+                      whileHover="hover"
+                      whileTap="tap"
+                      variants={tabButtonVariants}
+                      className="relative overflow-hidden rounded-md"
+                    >
+                      <TabsTrigger 
+                        value={tab.value} 
+                        className="relative z-10 w-full data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:font-medium"
+                      >
+                        {tab.label}
+                      </TabsTrigger>
+                      {activeCategory === tab.value && (
+                        <motion.div 
+                          layoutId="activeTab"
+                          className="absolute inset-0 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 -z-10"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        />
+                      )}
+                    </motion.div>
+                  ))}
                 </TabsList>
                 
                 <TabsContent value={activeCategory} className="mt-6">
@@ -180,7 +224,7 @@ const VideoSection = () => {
                     viewport={{ once: true }}
                     className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
                   >
-                    {filteredVideos.map((video) => (
+                    {filteredVideos.length > 0 ? filteredVideos.map((video) => (
                       <motion.div
                         key={video.id}
                         variants={item}
@@ -191,7 +235,7 @@ const VideoSection = () => {
                         className="group"
                       >
                         <div 
-                          className="cursor-pointer overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800 h-full flex flex-col"
+                          className="cursor-pointer overflow-hidden rounded-lg shadow-lg bg-white dark:bg-gray-800 h-full flex flex-col transform transition-all duration-300 hover:shadow-xl"
                           onClick={() => handleVideoSelect(video)}
                         >
                           <div className="relative overflow-hidden">
@@ -226,7 +270,15 @@ const VideoSection = () => {
                           </div>
                         </div>
                       </motion.div>
-                    ))}
+                    )) : (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="col-span-3 py-8 text-center"
+                      >
+                        <p className="text-lg text-gray-500 dark:text-gray-400">No videos found in this category. Check back soon!</p>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </TabsContent>
               </Tabs>
@@ -241,9 +293,13 @@ const VideoSection = () => {
             >
               <Button 
                 asChild
-                className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white border-none"
+                className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white border-none px-6 py-6 h-auto"
               >
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-youtube">
+                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+                    <path d="m10 15 5-3-5-3z" />
+                  </svg>
                   Visit Our YouTube Channel
                 </a>
               </Button>
