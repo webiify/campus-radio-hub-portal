@@ -41,7 +41,7 @@ const EventMarquee = () => {
           <h3 className="text-sm font-bold text-emerald-700 dark:text-emerald-300">LATEST UPDATES</h3>
         </div>
       
-        {/* Marquee content */}
+        {/* Marquee content - slowed down animation */}
         <div className="relative overflow-hidden">
           <motion.div
             className="whitespace-nowrap inline-block"
@@ -52,7 +52,7 @@ const EventMarquee = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 20,
+                duration: 30, // Increased from 20 to 30 to slow down
                 ease: "linear"
               }
             }}

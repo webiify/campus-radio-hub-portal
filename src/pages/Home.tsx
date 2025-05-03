@@ -7,20 +7,62 @@ import { format } from "date-fns";
 import VideoSection from "@/components/VideoSection";
 import { motion } from "framer-motion";
 import EventMarquee from "@/components/EventMarquee";
+import { Calendar } from "@/components/ui/calendar";
+import { useState } from "react";
 
 const Home = () => {
   const { events } = useEventContext();
+  const [date, setDate] = useState<Date | undefined>(new Date());
   
   // Get the most recent upcoming event
   const upcomingEvent = events
     .filter(event => new Date(event.date) >= new Date())
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0];
 
+  // Additional events for the events section
+  const additionalEvents = [
+    {
+      id: "event-1",
+      title: "Photography Workshop",
+      date: "2025-05-15",
+      description: "Learn advanced photography techniques from industry experts",
+      location: "Media Lab, Block B",
+      time: "2:00 PM"
+    },
+    {
+      id: "event-2",
+      title: "Radio Broadcasting Competition",
+      date: "2025-05-20",
+      description: "Show your talent in live radio broadcasting",
+      location: "Studio Room, Main Building",
+      time: "10:00 AM"
+    },
+    {
+      id: "event-3",
+      title: "Campus Film Festival",
+      date: "2025-06-10",
+      description: "Annual film festival showcasing student productions",
+      location: "College Auditorium",
+      time: "5:00 PM"
+    }
+  ];
+
+  // Combine with existing events
+  const allEvents = [...events, ...additionalEvents];
+
+  // Functions for opening PDFs
+  const openBrochure = () => {
+    // In a real app, this would open the actual PDF
+    alert("Opening club brochure PDF!");
+    // window.open("/brochures/club-brochure.pdf", "_blank");
+  };
+
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section with overlay */}
       <section className="relative h-screen w-full bg-college-bg bg-cover bg-center bg-no-repeat">
-        {/* Removed the color overlay div to show the original image */}
+        {/* Color overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 to-teal-600/40 backdrop-blur-[2px]"></div>
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
           <div className="overflow-hidden mb-4">
             <motion.h1 
@@ -77,14 +119,19 @@ const Home = () => {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white border-none">
+            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
+              <Button asChild className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white border-none shadow-lg hover:shadow-xl transition-all">
                 <Link to="/about">Know more about the club</Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-700">
+            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
+              <Button asChild variant="outline" className="backdrop-blur-sm bg-white/10 border-white text-white hover:bg-white hover:text-emerald-700 shadow-lg hover:shadow-xl transition-all">
                 <Link to="/study-material">Access Study Material</Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
+              <Button onClick={openBrochure} className="bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all">
+                Download Brochure
               </Button>
             </motion.div>
           </motion.div>
@@ -124,7 +171,7 @@ const Home = () => {
               className="mb-12 text-center"
             >
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Upcoming Event</h2>
-              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto"></div>
+              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
             </motion.div>
             
             <motion.div
@@ -158,14 +205,90 @@ const Home = () => {
                 </div>
               </div>
             </motion.div>
+
+            {/* Additional Events Section */}
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold mb-6 text-center text-emerald-700 dark:text-emerald-400">More Upcoming Events</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {additionalEvents.map(event => (
+                  <motion.div 
+                    key={event.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  >
+                    <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all">
+                      <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
+                      <CardContent className="p-6">
+                        <h3 className="text-lg font-bold mb-2 text-emerald-700 dark:text-emerald-400">{event.title}</h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                          {format(new Date(event.date), "MMMM dd, yyyy")} • {event.time}
+                        </p>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{event.description}</p>
+                        <p className="text-xs text-emerald-600 dark:text-emerald-500 font-medium">
+                          {event.location}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       )}
 
+      {/* Events Calendar Section */}
+      <section className="bg-emerald-50 dark:bg-emerald-900/20 py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Events Calendar</h2>
+            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Stay up to date with our upcoming events and revisit our past activities
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
+          >
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="pointer-events-auto mx-auto"
+              initialFocus
+            />
+            <div className="mt-4 pt-4 border-t border-dashed border-emerald-200 dark:border-emerald-800">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Club Events</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-3 w-3 rounded-full bg-teal-400"></div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Workshops</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Video Section */}
       <VideoSection />
 
-      {/* Features Section */}
+      {/* Features Section with enhanced animations */}
       <section className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -187,7 +310,7 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                   </svg>
                 ),
-                title: "Academic Resources",
+                title: "Education",
                 description: "Access to study materials, notes, and question papers from previous semesters for all branches."
               },
               {
@@ -197,7 +320,7 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                   </svg>
                 ),
-                title: "Media Content",
+                title: "Creativity",
                 description: "Original video series, interviews, documentaries, and radio programs produced by our talented members."
               },
               {
@@ -206,7 +329,7 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 ),
-                title: "Events & Workshops",
+                title: "Documentation",
                 description: "Regular workshops, events, and training sessions to develop skills in media production and broadcasting."
               }
             ].map((feature, index) => (
@@ -216,16 +339,34 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ 
+                  y: -15, 
+                  transition: { duration: 0.3 } 
+                }}
                 className="animate-float" 
               >
                 <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-800 dark:to-gray-900">
                   <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
                   <CardContent className="p-6">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">
+                    <motion.div 
+                      className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400"
+                      whileHover={{ 
+                        rotate: 10,
+                        scale: 1.1,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
                       {feature.icon}
-                    </div>
-                    <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">{feature.title}</h3>
+                    </motion.div>
+                    <motion.h3 
+                      className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100"
+                      whileHover={{ 
+                        color: "#10b981", 
+                        transition: { duration: 0.2 } 
+                      }}
+                    >
+                      {feature.title}
+                    </motion.h3>
                     <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
                   </CardContent>
                 </Card>

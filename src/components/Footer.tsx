@@ -5,8 +5,79 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-emerald-900 to-teal-800 text-white">
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <footer className="bg-gradient-to-r from-emerald-900 to-teal-800 text-white relative overflow-hidden">
+      {/* Animated video background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{ 
+            y: [0, -10, 0],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+          className="absolute w-[600px] h-[600px] -top-1/4 -right-1/4 rounded-full bg-gradient-to-br from-emerald-400/10 to-transparent"
+        />
+        <motion.div
+          animate={{ 
+            y: [0, 10, 0],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+          className="absolute w-[500px] h-[500px] -bottom-1/4 -left-1/4 rounded-full bg-gradient-to-tr from-teal-400/10 to-transparent"
+        />
+        <div className="absolute inset-0 backdrop-blur-[1px]"></div>
+      </div>
+
+      {/* Video animation element */}
+      <div className="absolute bottom-0 right-0 w-full h-40 opacity-20 overflow-hidden">
+        <svg viewBox="0 0 1440 320" className="absolute bottom-0 left-0">
+          <motion.path
+            d="M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,202.7C672,224,768,224,864,192C960,160,1056,96,1152,90.7C1248,85,1344,139,1392,165.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            fill="rgb(52, 211, 153)"
+            animate={{
+              d: [
+                "M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,202.7C672,224,768,224,864,192C960,160,1056,96,1152,90.7C1248,85,1344,139,1392,165.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,128L48,144C96,160,192,192,288,192C384,192,480,160,576,138.7C672,117,768,107,864,128C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,202.7C672,224,768,224,864,192C960,160,1056,96,1152,90.7C1248,85,1344,139,1392,165.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </svg>
+        <svg viewBox="0 0 1440 320" className="absolute bottom-0 left-0">
+          <motion.path
+            d="M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,192C672,203,768,213,864,208C960,203,1056,181,1152,186.7C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            fill="rgb(16, 185, 129)"
+            animate={{
+              d: [
+                "M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,192C672,203,768,213,864,208C960,203,1056,181,1152,186.7C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,224L48,229.3C96,235,192,245,288,245.3C384,245,480,235,576,224C672,213,768,203,864,218.7C960,235,1056,277,1152,277.3C1248,277,1344,235,1392,213.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,192C672,203,768,213,864,208C960,203,1056,181,1152,186.7C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+        </svg>
+      </div>
+
+      {/* Main footer content */}
+      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center">
@@ -138,6 +209,66 @@ const Footer = () => {
               Subscribe to get notifications about upcoming events and activities.
             </p>
             <SubscribeForm />
+
+            {/* Video element animation */}
+            <motion.div
+              className="mt-4 relative h-20 overflow-hidden rounded-lg bg-gradient-to-r from-teal-900/50 to-emerald-900/50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.7, 1, 0.7],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-10 w-10 text-emerald-300"
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <motion.span 
+                  className="ml-2 text-sm font-medium text-emerald-200"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  Watch Club Videos
+                </motion.span>
+              </motion.div>
+              <motion.div 
+                className="absolute bottom-0 left-0 w-full h-[2px]"
+                animate={{
+                  scaleX: [0, 1, 0],
+                  opacity: [0.5, 1, 0.5],
+                  x: ["-100%", "0%", "100%"]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                }}
+                style={{
+                  background: "linear-gradient(to right, transparent, #5eead4, transparent)"
+                }}
+              ></motion.div>
+            </motion.div>
           </div>
         </div>
 
