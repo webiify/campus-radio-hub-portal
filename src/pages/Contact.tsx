@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -41,20 +41,70 @@ const Contact = () => {
     });
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 100 }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { scale: 0.9, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 200,
+        delay: 0.6
+      }
+    },
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 5px 15px rgba(16, 185, 129, 0.4)"
+    },
+    tap: {
+      scale: 0.95
+    }
+  };
+
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Contact Header */}
-        <div className="mb-12 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
+        >
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Get In Touch With Us</h1>
           <p className="mt-4 text-lg text-gray-600">
             Have questions about the club or want to share your ideas? Reach out to us!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Information */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <Card className="overflow-hidden">
               <div className="aspect-auto h-72 w-full">
                 <iframe 
@@ -118,7 +168,7 @@ const Contact = () => {
                         </a>
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-500 hover:text-pink-600">
                           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.045-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.08c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
                           </svg>
                         </a>
                         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-blue-600">
@@ -137,17 +187,52 @@ const Contact = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
 
-          {/* Contact Form */}
-          <div>
-            <Card>
+          {/* Contact Form with Animations */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ 
+              boxShadow: "0 10px 30px rgba(16, 185, 129, 0.2)",
+              translateY: -5
+            }}
+            className="transition-all duration-300"
+          >
+            <Card className="overflow-hidden border-none shadow-lg">
+              {/* Decorative top border */}
+              <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
+              
               <CardContent className="p-6">
-                <h2 className="mb-6 text-2xl font-bold text-gray-900">Send Us a Message</h2>
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="mb-6 text-2xl font-bold text-gray-900 flex items-center"
+                >
+                  <motion.span 
+                    animate={{ rotate: [0, 10, -10, 10, 0] }}
+                    transition={{ repeat: Infinity, repeatDelay: 3, duration: 0.6 }}
+                    className="mr-2"
+                  >
+                    ✉️
+                  </motion.span>
+                  Send Us a Message
+                </motion.h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-4">
-                    <div>
+                <motion.form 
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  onSubmit={handleSubmit} 
+                  className="space-y-6"
+                >
+                  <motion.div variants={itemVariants} className="space-y-4">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-900">
                         Full Name <span className="text-red-500">*</span>
                       </label>
@@ -158,10 +243,14 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
-                    </div>
+                    </motion.div>
                     
-                    <div>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-900">
                         Email Address <span className="text-red-500">*</span>
                       </label>
@@ -173,10 +262,14 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
-                    </div>
+                    </motion.div>
                     
-                    <div>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-900">
                         Subject
                       </label>
@@ -186,10 +279,14 @@ const Contact = () => {
                         placeholder="Enter subject"
                         value={formData.subject}
                         onChange={handleChange}
+                        className="transition-all duration-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
-                    </div>
+                    </motion.div>
                     
-                    <div>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
                       <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-900">
                         Message <span className="text-red-500">*</span>
                       </label>
@@ -201,24 +298,44 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       />
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                   
-                  <Button 
-                    type="submit"
-                    className="w-full bg-club-primary text-white hover:bg-club-secondary"
+                  <motion.div
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
                   >
-                    Send Message
-                  </Button>
-                </form>
+                    <Button 
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white transition-all duration-300"
+                    >
+                      Send Message
+                      <motion.span
+                        className="ml-2"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ repeat: Infinity, duration: 1, repeatDelay: 1 }}
+                      >
+                        →
+                      </motion.span>
+                    </Button>
+                  </motion.div>
+                </motion.form>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
           <h2 className="mb-8 text-3xl font-bold text-gray-900 text-center">Frequently Asked Questions</h2>
           
           <div className="mx-auto max-w-3xl space-y-6">
@@ -262,7 +379,7 @@ const Contact = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

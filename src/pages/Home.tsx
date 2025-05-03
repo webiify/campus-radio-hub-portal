@@ -6,6 +6,7 @@ import { useEventContext } from "@/context/EventContext";
 import { format } from "date-fns";
 import VideoSection from "@/components/VideoSection";
 import { motion } from "framer-motion";
+import EventMarquee from "@/components/EventMarquee";
 
 const Home = () => {
   const { events } = useEventContext();
@@ -19,7 +20,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="relative h-screen w-full bg-college-bg bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-overlay" style={{ background: "linear-gradient(to bottom, rgba(16,122,92,0.85), rgba(20,147,111,0.7))" }}></div>
+        {/* Removed the color overlay div to show the original image */}
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
           <div className="overflow-hidden mb-4">
             <motion.h1 
@@ -107,6 +108,9 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Event Marquee */}
+      <EventMarquee />
 
       {/* Latest Event Section */}
       {upcomingEvent && (
