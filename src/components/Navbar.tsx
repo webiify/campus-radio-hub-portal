@@ -48,8 +48,8 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 shadow-lg backdrop-blur-sm"
-          : "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800"
+          ? "bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 shadow-lg backdrop-blur-sm"
+          : "bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@ const Navbar = () => {
                 <span className="text-lg font-semibold text-white">
                   Campus TV & Radio
                 </span>
-                <span className="text-xs text-blue-200">FRONTIERS</span>
+                <span className="text-xs text-teal-200">FRONTIERS</span>
               </motion.div>
             </Link>
           </div>
@@ -92,9 +92,9 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-blue-300 relative ${
+                    className={`text-sm font-medium transition-colors hover:text-teal-200 relative ${
                       location.pathname === link.href
-                        ? "text-blue-300"
+                        ? "text-teal-200"
                         : "text-white"
                     } hover:scale-105 inline-block`}
                   >
@@ -102,7 +102,7 @@ const Navbar = () => {
                     {location.pathname === link.href && (
                       <motion.span
                         layoutId="navunderline"
-                        className="absolute bottom-[-5px] left-0 w-full h-[2px] bg-blue-300"
+                        className="absolute bottom-[-5px] left-0 w-full h-[2px] bg-teal-200"
                         initial={{ width: 0 }}
                         animate={{ width: '100%' }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -122,7 +122,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme} 
-                className="ml-2 text-white hover:bg-blue-800/50 hover:text-blue-200"
+                className="ml-2 text-white hover:bg-emerald-600/50 hover:text-teal-200"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -136,7 +136,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme} 
-              className="mr-2 text-white hover:bg-transparent hover:text-blue-300"
+              className="mr-2 text-white hover:bg-transparent hover:text-teal-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -144,7 +144,7 @@ const Navbar = () => {
             
             <Button
               variant="ghost"
-              className="text-white hover:bg-transparent hover:text-blue-300"
+              className="text-white hover:bg-transparent hover:text-teal-200"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -156,7 +156,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div 
-          className="bg-gradient-to-r from-blue-800 to-blue-700 md:hidden"
+          className="bg-gradient-to-r from-emerald-800 to-teal-800 md:hidden"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -171,9 +171,9 @@ const Navbar = () => {
               >
                 <Link
                   to={link.href}
-                  className={`block py-2 text-base font-medium transition-colors hover:text-blue-300 ${
+                  className={`block py-2 text-base font-medium transition-colors hover:text-teal-200 ${
                     location.pathname === link.href
-                      ? "text-blue-300"
+                      ? "text-teal-200"
                       : "text-white"
                   }`}
                 >

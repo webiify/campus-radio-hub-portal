@@ -19,7 +19,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="relative h-screen w-full bg-college-bg bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-overlay" style={{ background: "linear-gradient(to bottom, rgba(63,50,146,0.85), rgba(86,56,177,0.7))" }}></div>
+        <div className="absolute inset-0 bg-overlay" style={{ background: "linear-gradient(to bottom, rgba(16,122,92,0.85), rgba(20,147,111,0.7))" }}></div>
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
           <div className="overflow-hidden mb-4">
             <motion.h1 
@@ -39,9 +39,9 @@ const Home = () => {
                 }}
                 className="relative inline-block"
               >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400">Campus TV and Radio Club</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-400">Campus TV and Radio Club</span>
                 <motion.span 
-                  className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-indigo-400 to-purple-500"
+                  className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-teal-400 to-emerald-500"
                   initial={{ scaleX: 0, originX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 1.2, duration: 0.8 }}
@@ -77,12 +77,12 @@ const Home = () => {
             className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white border-none">
+              <Button asChild className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white border-none">
                 <Link to="/about">Know more about the club</Link>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-indigo-700">
+              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-700">
                 <Link to="/study-material">Access Study Material</Link>
               </Button>
             </motion.div>
@@ -120,7 +120,7 @@ const Home = () => {
               className="mb-12 text-center"
             >
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Upcoming Event</h2>
-              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto"></div>
+              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto"></div>
             </motion.div>
             
             <motion.div
@@ -132,11 +132,11 @@ const Home = () => {
               className="mx-auto max-w-3xl"
             >
               <div className="overflow-hidden rounded-lg shadow-lg">
-                <div className="p-1 bg-gradient-to-r from-indigo-400 to-purple-600">
+                <div className="p-1 bg-gradient-to-r from-teal-400 to-emerald-600">
                   <div className="bg-white dark:bg-gray-800 p-6 sm:p-8">
                     <div className="flex flex-col justify-between sm:flex-row sm:items-center">
                       <div>
-                        <h3 className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{upcomingEvent.title}</h3>
+                        <h3 className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{upcomingEvent.title}</h3>
                         <p className="mt-1 text-lg text-gray-600 dark:text-gray-400">
                           {format(new Date(upcomingEvent.date), "MMMM dd, yyyy")}
                         </p>
@@ -144,7 +144,7 @@ const Home = () => {
                       </div>
                       <div className="mt-6 sm:mt-0">
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <Button asChild className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white">
+                          <Button asChild className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white">
                             <Link to="/events">View All Events</Link>
                           </Button>
                         </motion.div>
@@ -172,7 +172,7 @@ const Home = () => {
             className="mb-12 text-center"
           >
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">What We Offer</h2>
-            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto"></div>
+            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto"></div>
           </motion.div>
 
           <div className="grid gap-8 md:grid-cols-3">
@@ -213,11 +213,12 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
+                className="animate-float" 
               >
-                <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-indigo-50 dark:from-gray-800 dark:to-gray-900">
-                  <div className="h-2 bg-gradient-to-r from-indigo-400 to-purple-500"></div>
+                <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-800 dark:to-gray-900">
+                  <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
                   <CardContent className="p-6">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">
                       {feature.icon}
                     </div>
                     <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">{feature.title}</h3>
@@ -229,7 +230,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
     </>
   );
 };

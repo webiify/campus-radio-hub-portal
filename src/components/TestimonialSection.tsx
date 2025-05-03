@@ -25,11 +25,11 @@ const TestimonialSection = () => {
 
   return (
     <section className="relative py-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800"></div>
       
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-gradient-to-r from-purple-300 to-indigo-300 opacity-10 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-gradient-to-r from-indigo-300 to-blue-300 opacity-10 translate-x-1/4 translate-y-1/4 animate-spin-slow"></div>
+      <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-gradient-to-r from-teal-300 to-emerald-300 opacity-10 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 opacity-10 translate-x-1/4 translate-y-1/4 animate-spin-slow"></div>
       
       <motion.div
         initial={{ opacity: 0 }}
@@ -46,7 +46,7 @@ const TestimonialSection = () => {
           className="mb-12 text-center"
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">What Our Members Say</h2>
-          <div className="mt-2 h-1 w-20 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto"></div>
+          <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Hear from our members about their experiences with the Campus TV and Radio Club.
           </p>
