@@ -14,10 +14,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 160 84% 39%;
+    --primary: 252 59% 48%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 165 84% 40%;
+    --secondary: 262 83% 58%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -55,10 +55,10 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 160 84% 39%;
+    --primary: 252 59% 54%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 262 83% 58%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -135,13 +135,13 @@
 
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 5px rgba(15, 251, 205, 0.3);
+    box-shadow: 0 0 5px rgba(79, 70, 229, 0.3);
   }
   50% {
-    box-shadow: 0 0 20px rgba(15, 251, 205, 0.8);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
   }
   100% {
-    box-shadow: 0 0 5px rgba(15, 251, 205, 0.3);
+    box-shadow: 0 0 5px rgba(79, 70, 229, 0.3);
   }
 }
 
@@ -219,7 +219,7 @@ button:hover::after, a.btn:hover::after, .btn:hover::after {
 
 /* Custom cursor styles */
 .custom-cursor {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.15s ease;
 }
 
 a:hover ~ .custom-cursor,
@@ -230,15 +230,19 @@ button:hover ~ .custom-cursor,
 
 /* Background gradients */
 .bg-overlay {
-  background-color: rgba(5, 44, 54, 0.7);
+  background-color: rgba(67, 56, 202, 0.7);
 }
 
-.bg-gradient-emerald {
-  @apply bg-gradient-to-r from-emerald-500 to-teal-500;
+.bg-gradient-purple {
+  @apply bg-gradient-to-r from-indigo-500 to-purple-600;
+}
+
+.bg-gradient-blue {
+  @apply bg-gradient-to-r from-blue-500 to-indigo-500;
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500;
 }
 
 /* Card effects */
@@ -265,7 +269,7 @@ button:hover ~ .custom-cursor,
 .border-gradient {
   border: 2px solid;
   border-image-slice: 1;
-  border-image-source: linear-gradient(to right, theme('colors.emerald.500'), theme('colors.teal.500'));
+  border-image-source: linear-gradient(to right, theme('colors.indigo.500'), theme('colors.purple.500'));
 }
 
 /* Glass morphism */
@@ -287,14 +291,64 @@ button:hover ~ .custom-cursor,
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-emerald-500 rounded-full;
+  @apply bg-indigo-500 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-emerald-600;
+  @apply bg-indigo-600;
 }
 
 /* Image filters */
-.img-emerald-filter {
-  filter: hue-rotate(145deg) saturate(1.2);
+.img-purple-filter {
+  filter: hue-rotate(45deg) saturate(1.2);
+}
+
+/* Testimonial floating effect */
+.testimonial-float {
+  animation: testimonialFloat 4s ease-in-out infinite;
+}
+
+@keyframes testimonialFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Video card hover effects */
+.video-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Improved aspect ratio for video thumbnails */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* CSS for improved mobile responsiveness */
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

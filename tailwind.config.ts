@@ -64,11 +64,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				club: {
-					primary: '#0FFBCD',
-					secondary: '#0FC1CD',
-					dark: '#052c36',
-					light: '#e6fffc',
-					accent: '#FF3A5E',
+					primary: '#4F46E5',
+					secondary: '#8B5CF6',
+					dark: '#1E1B4B',
+					light: '#F5F3FF',
+					accent: '#C026D3',
 				}
 			},
 			borderRadius: {
@@ -104,6 +104,11 @@ export default {
 				pulse: {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' }
+				},
+				float: {
+					'0%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' },
+					'100%': { transform: 'translateY(0px)' }
 				}
 			},
 			animation: {
@@ -111,10 +116,12 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				fadeIn: 'fadeIn 0.5s ease-out',
 				slideUp: 'slideUp 0.5s ease-out',
-				pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+				pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				float: 'float 3s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'college-bg': "url('/public/lovable-uploads/4a4f57f5-671a-4cb0-8761-a31c77fd4d57.png')"
+				'college-bg': "url('/public/lovable-uploads/4a4f57f5-671a-4cb0-8761-a31c77fd4d57.png')",
+				'gradient-purple': "linear-gradient(to right, #4F46E5, #8B5CF6, #C026D3)"
 			}
 		}
 	},
