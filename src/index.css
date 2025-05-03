@@ -14,10 +14,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 176 97% 52%;
+    --primary: 160 84% 39%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 185 86% 43%;
+    --secondary: 165 84% 40%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -55,7 +55,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 176 97% 52%;
+    --primary: 160 84% 39%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -91,9 +91,15 @@
 
   body {
     @apply bg-background text-foreground;
+    cursor: none;
+  }
+  
+  a, button, [role="button"] {
+    cursor: none;
   }
 }
 
+/* Enhanced animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -108,7 +114,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -128,11 +134,35 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(15, 251, 205, 0.5);
+  0% {
+    box-shadow: 0 0 5px rgba(15, 251, 205, 0.3);
   }
   50% {
     box-shadow: 0 0 20px rgba(15, 251, 205, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(15, 251, 205, 0.3);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -152,10 +182,66 @@
   animation: pulseGlow 2s infinite;
 }
 
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+/* Button hover effects */
+button, a.btn, .btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover::after, a.btn:hover::after, .btn:hover::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  transition: opacity 0.3s ease;
+}
+
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor,
+[role="button"]:hover ~ .custom-cursor {
+  transform: scale(1.5) !important;
+}
+
+/* Background gradients */
 .bg-overlay {
   background-color: rgba(5, 44, 54, 0.7);
 }
 
+.bg-gradient-emerald {
+  @apply bg-gradient-to-r from-emerald-500 to-teal-500;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500;
+}
+
+/* Card effects */
 .semester-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -173,4 +259,42 @@
 
 .semester-card:hover .branch-list {
   max-height: 500px;
+}
+
+/* Custom border gradients */
+.border-gradient {
+  border: 2px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, theme('colors.emerald.500'), theme('colors.teal.500'));
+}
+
+/* Glass morphism */
+.glass-card {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+.dark .glass-card {
+  @apply bg-black/10 border-white/10;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-emerald-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-emerald-600;
+}
+
+/* Image filters */
+.img-emerald-filter {
+  filter: hue-rotate(145deg) saturate(1.2);
 }

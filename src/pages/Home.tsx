@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useEventContext } from "@/context/EventContext";
 import { format } from "date-fns";
 import VideoSection from "@/components/VideoSection";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const { events } = useEventContext();
@@ -19,59 +20,141 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="relative h-screen w-full bg-college-bg bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-overlay"></div>
+        <div className="absolute inset-0 bg-overlay" style={{ background: "linear-gradient(to bottom, rgba(5,44,54,0.85), rgba(5,44,54,0.7))" }}></div>
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            <div className="overflow-hidden">
-              <span className="block text-club-primary animate-fadeIn inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-club-primary after:origin-left after:scale-x-100">
-                Campus TV and Radio Club
-              </span>
-            </div>
-            <div className="overflow-hidden mt-2">
-              <span className="block animate-slideUp inline-block" style={{ animationDelay: '0.3s' }}>BCE BHAGALPUR</span>
-            </div>
-          </h1>
-          <p className="mb-8 max-w-3xl text-lg opacity-90 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
-            Showcasing campus events, activities, and talent through media, broadcasting, and creative content.
-          </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 animate-fadeIn" style={{ animationDelay: '0.9s' }}>
-            <Button asChild className="bg-club-primary text-white hover:bg-club-secondary">
-              <Link to="/about">Know more about the club</Link>
-            </Button>
-            <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-club-dark">
-              <Link to="/study-material">Access Study Material</Link>
-            </Button>
+          <div className="overflow-hidden mb-4">
+            <motion.h1 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+            >
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 100, 
+                  damping: 15,
+                  delay: 0.2
+                }}
+                className="relative inline-block"
+              >
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-400">Campus TV and Radio Club</span>
+                <motion.span 
+                  className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-400 to-teal-500"
+                  initial={{ scaleX: 0, originX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1.2, duration: 0.8 }}
+                ></motion.span>
+              </motion.div>
+            </motion.h1>
           </div>
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="overflow-hidden mt-2"
+          >
+            <motion.span 
+              className="block text-3xl md:text-4xl font-bold"
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}
+            >
+              BCE BHAGALPUR
+            </motion.span>
+          </motion.div>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="mb-8 max-w-3xl text-lg opacity-90 mt-4"
+          >
+            Showcasing campus events, activities, and talent through media, broadcasting, and creative content.
+          </motion.p>
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+            className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild className="bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white border-none">
+                <Link to="/about">Know more about the club</Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-emerald-700">
+                <Link to="/study-material">Access Study Material</Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+          
+          {/* Animated scroll indicator */}
+          <motion.div 
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+            animate={{ 
+              y: [0, 10, 0],
+              opacity: [0.4, 1, 0.4]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity,
+              repeatType: "loop" 
+            }}
+          >
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5L12 19M12 19L19 12M12 19L5 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.div>
         </div>
       </section>
 
       {/* Latest Event Section */}
       {upcomingEvent && (
-        <section className="bg-white py-16">
+        <section className="bg-white dark:bg-gray-900 py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900">Upcoming Event</h2>
-              <div className="mt-2 h-1 w-20 bg-club-primary mx-auto"></div>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="mb-12 text-center"
+            >
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Upcoming Event</h2>
+              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
+            </motion.div>
             
-            <div className="mx-auto max-w-3xl overflow-hidden rounded-lg bg-gradient-to-r from-club-dark to-club-secondary p-1 shadow-lg">
-              <div className="bg-white p-6 sm:p-8">
-                <div className="flex flex-col justify-between sm:flex-row sm:items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">{upcomingEvent.title}</h3>
-                    <p className="mt-1 text-lg text-gray-600">
-                      {format(new Date(upcomingEvent.date), "MMMM dd, yyyy")}
-                    </p>
-                    <p className="mt-3 text-gray-700">{upcomingEvent.description}</p>
-                  </div>
-                  <div className="mt-6 sm:mt-0">
-                    <Button asChild className="bg-club-primary text-white hover:bg-club-secondary">
-                      <Link to="/events">View All Events</Link>
-                    </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -5 }}
+              className="mx-auto max-w-3xl"
+            >
+              <div className="overflow-hidden rounded-lg shadow-lg">
+                <div className="p-1 bg-gradient-to-r from-emerald-400 to-teal-600">
+                  <div className="bg-white dark:bg-gray-800 p-6 sm:p-8">
+                    <div className="flex flex-col justify-between sm:flex-row sm:items-center">
+                      <div>
+                        <h3 className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{upcomingEvent.title}</h3>
+                        <p className="mt-1 text-lg text-gray-600 dark:text-gray-400">
+                          {format(new Date(upcomingEvent.date), "MMMM dd, yyyy")}
+                        </p>
+                        <p className="mt-3 text-gray-700 dark:text-gray-300">{upcomingEvent.description}</p>
+                      </div>
+                      <div className="mt-6 sm:mt-0">
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button asChild className="bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white">
+                            <Link to="/events">View All Events</Link>
+                          </Button>
+                        </motion.div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       )}
@@ -80,69 +163,122 @@ const Home = () => {
       <VideoSection />
 
       {/* Features Section */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">What We Offer</h2>
-            <div className="mt-2 h-1 w-20 bg-club-primary mx-auto"></div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">What We Offer</h2>
+            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
+          </motion.div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            <Card className="overflow-hidden border-none shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-2 bg-club-primary"></div>
-              <CardContent className="p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-club-primary/10 text-club-primary">
+            {[
+              {
+                icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                   </svg>
-                </div>
-                <h3 className="mb-2 text-xl font-bold">Academic Resources</h3>
-                <p className="text-gray-600">Access to study materials, notes, and question papers from previous semesters for all branches.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-none shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-2 bg-club-secondary"></div>
-              <CardContent className="p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-club-secondary/10 text-club-secondary">
+                ),
+                title: "Academic Resources",
+                description: "Access to study materials, notes, and question papers from previous semesters for all branches."
+              },
+              {
+                icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                   </svg>
-                </div>
-                <h3 className="mb-2 text-xl font-bold">Media Content</h3>
-                <p className="text-gray-600">Original video series, interviews, documentaries, and radio programs produced by our talented members.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-none shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-2 bg-club-accent"></div>
-              <CardContent className="p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-club-accent/10 text-club-accent">
+                ),
+                title: "Media Content",
+                description: "Original video series, interviews, documentaries, and radio programs produced by our talented members."
+              },
+              {
+                icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                </div>
-                <h3 className="mb-2 text-xl font-bold">Events & Workshops</h3>
-                <p className="text-gray-600">Regular workshops, events, and training sessions to develop skills in media production and broadcasting.</p>
-              </CardContent>
-            </Card>
+                ),
+                title: "Events & Workshops",
+                description: "Regular workshops, events, and training sessions to develop skills in media production and broadcasting."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+              >
+                <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-800 dark:to-gray-900">
+                  <div className="h-2 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+                  <CardContent className="p-6">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">
+                      {feature.icon}
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">{feature.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-club-dark py-16 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Stay Updated with Our Latest Events</h2>
-            <p className="mt-4 text-lg opacity-90">
+      <section className="relative overflow-hidden py-16">
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900 to-teal-800"></div>
+        <div 
+          className="absolute inset-0 opacity-20" 
+          style={{ 
+            backgroundImage: "url('/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png')", 
+            backgroundSize: "30%", 
+            backgroundRepeat: "repeat",
+            filter: "blur(1px)" 
+          }}
+        ></div>
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-3xl font-bold tracking-tight sm:text-4xl text-white"
+            >
+              Stay Updated with Our Latest Events
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-4 text-lg text-emerald-100"
+            >
               Subscribe to receive notifications about upcoming events, new workshops, and study material updates.
-            </p>
-            <div className="mt-8 mx-auto max-w-md">
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8 mx-auto max-w-md"
+            >
               <SubscribeForm />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </>

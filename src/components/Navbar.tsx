@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,22 +48,32 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-club-dark bg-opacity-90 shadow-md backdrop-blur-sm"
-          : "bg-transparent"
+          ? "bg-gradient-to-r from-emerald-800 to-teal-600 shadow-md backdrop-blur-sm"
+          : "bg-gradient-to-r from-emerald-900 to-teal-700"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img
-                src="/public/lovable-uploads/350bd875-709f-4942-ac08-e570f1475978.png"
-                alt="Campus TV and Radio Club Logo"
-                className="h-10 w-auto"
+              <motion.img
+                src="/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png"
+                alt="Frontiers - Campus TV and Radio Club Logo"
+                className="h-12 w-auto"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               />
-              <span className="ml-2 text-lg font-semibold text-white">
-                Campus TV & Radio
-              </span>
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="ml-3 flex flex-col"
+              >
+                <span className="text-lg font-semibold text-white">
+                  Campus TV & Radio
+                </span>
+                <span className="text-xs text-emerald-200">FRONTIERS</span>
+              </motion.div>
             </Link>
           </div>
 
@@ -70,31 +81,40 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <ul className="flex space-x-6">
               {links.map((link) => (
-                <li key={link.href}>
+                <motion.li 
+                  key={link.href}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
                   <Link
                     to={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-club-primary ${
+                    className={`text-sm font-medium transition-colors hover:text-emerald-300 ${
                       location.pathname === link.href
-                        ? "text-club-primary"
+                        ? "text-emerald-300"
                         : "text-white"
                     } hover:scale-105 inline-block`}
                   >
                     {link.label}
                   </Link>
-                </li>
+                </motion.li>
               ))}
             </ul>
             
             {/* Theme Toggle Button */}
-            <Button 
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme} 
-              className="ml-2 text-white hover:bg-white/10 hover:text-club-primary"
-              aria-label="Toggle theme"
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+              <Button 
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme} 
+                className="ml-2 text-white hover:bg-emerald-600/30 hover:text-emerald-200"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+            </motion.div>
           </nav>
 
           {/* Mobile Navigation Button */}
@@ -103,7 +123,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme} 
-              className="mr-2 text-white hover:bg-transparent hover:text-club-primary"
+              className="mr-2 text-white hover:bg-transparent hover:text-emerald-300"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -111,7 +131,7 @@ const Navbar = () => {
             
             <Button
               variant="ghost"
-              className="text-white hover:bg-transparent hover:text-club-primary"
+              className="text-white hover:bg-transparent hover:text-emerald-300"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -122,24 +142,34 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="bg-club-dark md:hidden">
+        <motion.div 
+          className="bg-gradient-to-r from-emerald-800 to-teal-600 md:hidden"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <ul className="space-y-2 px-4 py-4">
             {links.map((link) => (
-              <li key={link.href}>
+              <motion.li 
+                key={link.href}
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <Link
                   to={link.href}
-                  className={`block py-2 text-base font-medium transition-colors hover:text-club-primary ${
+                  className={`block py-2 text-base font-medium transition-colors hover:text-emerald-300 ${
                     location.pathname === link.href
-                      ? "text-club-primary"
+                      ? "text-emerald-300"
                       : "text-white"
                   }`}
                 >
                   {link.label}
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
     </header>
   );
