@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="absolute inset-0 backdrop-blur-[1px]"></div>
       </div>
 
-      {/* Video animation element */}
+      {/* Enhanced video animation element */}
       <div className="absolute bottom-0 right-0 w-full h-40 opacity-20 overflow-hidden">
         <svg viewBox="0 0 1440 320" className="absolute bottom-0 left-0">
           <motion.path
@@ -74,6 +74,89 @@ const Footer = () => {
             }}
           />
         </svg>
+        
+        {/* Adding more animated elements for "video-like" animations */}
+        <motion.div
+          className="absolute bottom-20 left-1/4 w-12 h-12 rounded-full bg-teal-400/20"
+          animate={{
+            y: [-20, 0, -20],
+            scale: [1, 1.2, 1],
+            opacity: [0.4, 0.7, 0.4],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-1/3 w-16 h-16 rounded-full bg-emerald-400/20"
+          animate={{
+            y: [-15, 5, -15],
+            scale: [0.9, 1.1, 0.9],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute bottom-40 right-1/4 w-20 h-20 rounded-full bg-teal-300/10"
+          animate={{
+            y: [-10, 10, -10],
+            x: [10, -10, 10],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
+
+      {/* Animated slogan */}
+      <div className="relative z-10 py-4 bg-gradient-to-r from-emerald-800/80 to-teal-700/80 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h3 
+            className="text-xl font-bold tracking-wider text-white"
+            animate={{ 
+              textShadow: ["0 0 5px rgba(20, 184, 166, 0.5)", "0 0 15px rgba(20, 184, 166, 0.8)", "0 0 5px rgba(20, 184, 166, 0.5)"] 
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            <motion.span 
+              className="inline-block mr-2"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+            >
+              DISCOVER
+            </motion.span>
+            <motion.span
+              className="inline-block mx-2" 
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, delay: 0.5, repeat: Infinity, repeatDelay: 1 }}
+            >
+              DEVELOP
+            </motion.span>
+            <motion.span 
+              className="inline-block ml-2"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, delay: 1, repeat: Infinity, repeatDelay: 1 }}
+            >
+              DOMINATE
+            </motion.span>
+          </motion.h3>
+        </motion.div>
       </div>
 
       {/* Main footer content */}
@@ -82,7 +165,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center">
               <motion.img
-                src="/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png"
+                src="/public/lovable-uploads/9dbcbdc2-1954-4fc1-ac5e-df9f8c1a5e59.png"
                 alt="Frontiers - Campus TV and Radio Club Logo"
                 className="h-16 w-auto mr-3"
                 whileHover={{ rotate: 5 }}
@@ -210,9 +293,9 @@ const Footer = () => {
             </p>
             <SubscribeForm />
 
-            {/* Video element animation */}
+            {/* Enhanced video element animation */}
             <motion.div
-              className="mt-4 relative h-20 overflow-hidden rounded-lg bg-gradient-to-r from-teal-900/50 to-emerald-900/50"
+              className="mt-4 relative h-24 overflow-hidden rounded-lg bg-gradient-to-r from-teal-900/50 to-emerald-900/50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -229,18 +312,35 @@ const Footer = () => {
                   repeatType: "reverse"
                 }}
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 text-emerald-300"
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
                 >
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-10 w-10 text-emerald-300"
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <motion.div 
+                    className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+                    animate={{ 
+                      scale: [1, 1.4, 1],
+                      opacity: [0.8, 1, 0.8] 
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                </motion.div>
                 <motion.span 
                   className="ml-2 text-sm font-medium text-emerald-200"
                   animate={{ opacity: [0.7, 1, 0.7] }}
@@ -253,6 +353,8 @@ const Footer = () => {
                   Watch Club Videos
                 </motion.span>
               </motion.div>
+              
+              {/* Multiple animated lines to create video player effect */}
               <motion.div 
                 className="absolute bottom-0 left-0 w-full h-[2px]"
                 animate={{
@@ -263,6 +365,40 @@ const Footer = () => {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
+                }}
+                style={{
+                  background: "linear-gradient(to right, transparent, #5eead4, transparent)"
+                }}
+              ></motion.div>
+              
+              <motion.div 
+                className="absolute bottom-3 left-0 w-1/2 h-[1px]"
+                animate={{
+                  scaleX: [0, 1, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                  x: ["0%", "100%", "200%"]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: 1
+                }}
+                style={{
+                  background: "linear-gradient(to right, transparent, #5eead4, transparent)"
+                }}
+              ></motion.div>
+              
+              <motion.div 
+                className="absolute top-5 right-0 w-1/3 h-[1px]"
+                animate={{
+                  scaleX: [0, 1, 0],
+                  opacity: [0.3, 0.6, 0.3],
+                  x: ["100%", "0%", "-100%"]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  delay: 0.5
                 }}
                 style={{
                   background: "linear-gradient(to right, transparent, #5eead4, transparent)"

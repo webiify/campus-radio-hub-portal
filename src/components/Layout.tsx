@@ -6,6 +6,7 @@ import EventNotification from "./EventNotification";
 import { useEventContext } from "@/context/EventContext";
 import CursorEffect from "./CursorEffect";
 import TestimonialSection from "./TestimonialSection";
+import FAQSection from "./FAQSection";
 
 const Layout = () => {
   const { currentEvent } = useEventContext();
@@ -20,7 +21,12 @@ const Layout = () => {
       <main className="flex-1">
         <Outlet />
       </main>
-      {isHomePage && <TestimonialSection />}
+      {isHomePage && (
+        <>
+          <FAQSection />
+          <TestimonialSection />
+        </>
+      )}
       <Footer />
     </div>
   );

@@ -58,11 +58,11 @@ const Navbar = () => {
             <Link to="/" className="flex items-center">
               <motion.div
                 className="p-1 rounded-lg shadow-md"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <img
-                  src="/public/lovable-uploads/00c7b88d-c3d3-4460-a245-30451d624675.png"
+                  src="/public/lovable-uploads/9dbcbdc2-1954-4fc1-ac5e-df9f8c1a5e59.png"
                   alt="Frontiers - Campus TV and Radio Club Logo"
                   className="h-10 w-auto object-contain"
                 />

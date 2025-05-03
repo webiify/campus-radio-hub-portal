@@ -24,12 +24,60 @@ const Home = () => {
     // window.open("/brochures/club-brochure.pdf", "_blank");
   };
 
+  // Text animation variants
+  const textContainer = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const textChild = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
     <>
-      {/* Hero Section with overlay */}
+      {/* Hero Section with enhanced overlay */}
       <section className="relative h-screen w-full bg-college-bg bg-cover bg-center bg-no-repeat">
-        {/* Color overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 to-teal-600/40 backdrop-blur-[2px]"></div>
+        {/* Enhanced color overlay with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 via-teal-600/50 to-emerald-700/40 backdrop-blur-[2px]"></div>
+        
+        {/* Animated particles in the background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-teal-300/30"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                x: [0, Math.random() * 50 - 25, 0],
+                opacity: [0, 0.8, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 10,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+        
         <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white sm:px-6 lg:px-8">
           <div className="overflow-hidden mb-4">
             <motion.h1 
@@ -49,7 +97,166 @@ const Home = () => {
                 }}
                 className="relative inline-block"
               >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-400">Campus TV and Radio Club</span>
+                <motion.span 
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-400"
+                  animate={{
+                    textShadow: [
+                      "0 0 5px rgba(94, 234, 212, 0.3)",
+                      "0 0 15px rgba(94, 234, 212, 0.6)",
+                      "0 0 5px rgba(94, 234, 212, 0.3)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    C
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.1, repeat: Infinity }}
+                  >
+                    A
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.2, repeat: Infinity }}
+                  >
+                    M
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.3, repeat: Infinity }}
+                  >
+                    P
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.4, repeat: Infinity }}
+                  >
+                    U
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
+                  >
+                    S
+                  </motion.span>
+                  &nbsp;
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.6, repeat: Infinity }}
+                  >
+                    T
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.7, repeat: Infinity }}
+                  >
+                    V
+                  </motion.span>
+                  &nbsp;
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.8, repeat: Infinity }}
+                  >
+                    A
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 0.9, repeat: Infinity }}
+                  >
+                    N
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.0, repeat: Infinity }}
+                  >
+                    D
+                  </motion.span>
+                  &nbsp;
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.1, repeat: Infinity }}
+                  >
+                    R
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.2, repeat: Infinity }}
+                  >
+                    A
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.3, repeat: Infinity }}
+                  >
+                    D
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.4, repeat: Infinity }}
+                  >
+                    I
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.5, repeat: Infinity }}
+                  >
+                    O
+                  </motion.span>
+                  &nbsp;
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.6, repeat: Infinity }}
+                  >
+                    C
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.7, repeat: Infinity }}
+                  >
+                    L
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.8, repeat: Infinity }}
+                  >
+                    U
+                  </motion.span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ scale: [1, 1.03, 1] }}
+                    transition={{ duration: 2, delay: 1.9, repeat: Infinity }}
+                  >
+                    B
+                  </motion.span>
+                </motion.span>
                 <motion.span 
                   className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-teal-400 to-emerald-500"
                   initial={{ scaleX: 0, originX: 0 }}
@@ -68,47 +275,141 @@ const Home = () => {
             <motion.span 
               className="block text-3xl md:text-4xl font-bold"
               style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}
+              animate={{
+                textShadow: [
+                  "0 2px 4px rgba(0,0,0,0.3)",
+                  "0 4px 8px rgba(0,0,0,0.5)",
+                  "0 2px 4px rgba(0,0,0,0.3)",
+                ]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
             >
               BCE BHAGALPUR
             </motion.span>
           </motion.div>
+          
+          {/* Animated slogan */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
+            className="mt-6 mb-4"
+          >
+            <motion.h2 
+              className="text-xl font-bold tracking-wider text-white"
+              animate={{ 
+                textShadow: ["0 0 5px rgba(20, 184, 166, 0.5)", "0 0 15px rgba(20, 184, 166, 0.8)", "0 0 5px rgba(20, 184, 166, 0.5)"] 
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <motion.span 
+                className="inline-block mr-2"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+              >
+                DISCOVER
+              </motion.span>
+              <motion.span
+                className="inline-block mx-2" 
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, delay: 0.5, repeat: Infinity, repeatDelay: 1 }}
+              >
+                DEVELOP
+              </motion.span>
+              <motion.span 
+                className="inline-block ml-2"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 1.5, delay: 1, repeat: Infinity, repeatDelay: 1 }}
+              >
+                DOMINATE
+              </motion.span>
+            </motion.h2>
+          </motion.div>
+          
+          {/* Animated description text */}
           <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            variants={textContainer}
+            initial="hidden"
+            animate="visible"
             className="mb-8 max-w-3xl text-lg opacity-90 mt-4"
           >
-            Showcasing campus events, activities, and talent through media, broadcasting, and creative content.
+            {Array.from("Showcasing campus events, activities, and talent through media, broadcasting, and creative content.").map((char, index) => (
+              <motion.span key={index} variants={textChild} className="inline-block">
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.p>
+          
           <motion.div 
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.8 }}
             className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
-            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
-              <Button asChild className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white border-none shadow-lg hover:shadow-xl transition-all">
+            <motion.div 
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)" }} 
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                asChild 
+                className="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white border-none shadow-lg hover:shadow-xl transition-all"
+              >
                 <Link to="/about">Know more about the club</Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
-              <Button asChild variant="outline" className="backdrop-blur-sm bg-white/10 border-white text-white hover:bg-white hover:text-emerald-700 shadow-lg hover:shadow-xl transition-all">
-                <Link to="/study-material">Access Study Material</Link>
+            <motion.div 
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "rgba(255, 255, 255, 0.2)"
+              }} 
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                asChild 
+                variant="outline" 
+                className="backdrop-blur-sm bg-white/10 border-white text-white shadow-lg transition-all"
+              >
+                <Link to="/study-material">
+                  <motion.span
+                    animate={{
+                      color: ["rgb(255, 255, 255)", "rgb(134, 239, 172)", "rgb(255, 255, 255)"]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    Access Study Material
+                  </motion.span>
+                </Link>
               </Button>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }} whileTap={{ scale: 0.95 }}>
-              <Button onClick={openBrochure} className="bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all">
+            <motion.div 
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)" }} 
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                onClick={openBrochure} 
+                className="bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
                 Download Brochure
               </Button>
             </motion.div>
           </motion.div>
           
-          {/* Animated scroll indicator */}
+          {/* Enhanced animated scroll indicator */}
           <motion.div 
             className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
             animate={{ 
               y: [0, 10, 0],
-              opacity: [0.4, 1, 0.4]
+              opacity: [0.4, 1, 0.4],
+              scale: [1, 1.1, 1]
             }}
             transition={{ 
               duration: 2, 
@@ -123,7 +424,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Event Marquee */}
+      {/* Event Marquee - Slowed down animation */}
       <EventMarquee />
 
       {/* Latest Event Section */}
@@ -234,7 +535,6 @@ const Home = () => {
                   y: -15, 
                   transition: { duration: 0.3 } 
                 }}
-                className="animate-float" 
               >
                 <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-800 dark:to-gray-900">
                   <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
@@ -242,9 +542,26 @@ const Home = () => {
                     <motion.div 
                       className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400"
                       whileHover={{ 
-                        rotate: 10,
-                        scale: 1.1,
-                        transition: { duration: 0.2 }
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.2, 0.9, 1.1, 1],
+                        transition: { 
+                          duration: 1,
+                          times: [0, 0.2, 0.5, 0.8, 1],
+                        }
+                      }}
+                      animate={{
+                        boxShadow: [
+                          "0 0 0 rgba(16, 185, 129, 0)",
+                          "0 0 20px rgba(16, 185, 129, 0.5)",
+                          "0 0 0 rgba(16, 185, 129, 0)"
+                        ],
+                      }}
+                      transition={{
+                        boxShadow: {
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "loop"
+                        }
                       }}
                     >
                       {feature.icon}
@@ -253,6 +570,7 @@ const Home = () => {
                       className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100"
                       whileHover={{ 
                         color: "#10b981", 
+                        scale: 1.05,
                         transition: { duration: 0.2 } 
                       }}
                     >
