@@ -25,7 +25,7 @@ const TestimonialSection = () => {
 
   return (
     <section className="relative py-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800"></div>
       
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-gradient-to-r from-purple-300 to-indigo-300 opacity-10 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"></div>

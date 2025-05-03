@@ -48,8 +48,8 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-gradient-to-r from-emerald-800 to-teal-600 shadow-md backdrop-blur-sm"
-          : "bg-gradient-to-r from-emerald-900 to-teal-700"
+          ? "bg-gradient-to-r from-indigo-800 to-purple-800 shadow-lg backdrop-blur-sm"
+          : "bg-gradient-to-r from-indigo-900 to-purple-900"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +72,7 @@ const Navbar = () => {
                 <span className="text-lg font-semibold text-white">
                   Campus TV & Radio
                 </span>
-                <span className="text-xs text-emerald-200">FRONTIERS</span>
+                <span className="text-xs text-indigo-200">FRONTIERS</span>
               </motion.div>
             </Link>
           </div>
@@ -88,9 +88,9 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-emerald-300 ${
+                    className={`text-sm font-medium transition-colors hover:text-indigo-300 ${
                       location.pathname === link.href
-                        ? "text-emerald-300"
+                        ? "text-indigo-300"
                         : "text-white"
                     } hover:scale-105 inline-block`}
                   >
@@ -109,7 +109,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme} 
-                className="ml-2 text-white hover:bg-emerald-600/30 hover:text-emerald-200"
+                className="ml-2 text-white hover:bg-indigo-600/30 hover:text-indigo-200"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -123,7 +123,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme} 
-              className="mr-2 text-white hover:bg-transparent hover:text-emerald-300"
+              className="mr-2 text-white hover:bg-transparent hover:text-indigo-300"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -131,7 +131,7 @@ const Navbar = () => {
             
             <Button
               variant="ghost"
-              className="text-white hover:bg-transparent hover:text-emerald-300"
+              className="text-white hover:bg-transparent hover:text-indigo-300"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -143,7 +143,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div 
-          className="bg-gradient-to-r from-emerald-800 to-teal-600 md:hidden"
+          className="bg-gradient-to-r from-indigo-800 to-purple-800 md:hidden"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -158,9 +158,9 @@ const Navbar = () => {
               >
                 <Link
                   to={link.href}
-                  className={`block py-2 text-base font-medium transition-colors hover:text-emerald-300 ${
+                  className={`block py-2 text-base font-medium transition-colors hover:text-indigo-300 ${
                     location.pathname === link.href
-                      ? "text-emerald-300"
+                      ? "text-indigo-300"
                       : "text-white"
                   }`}
                 >

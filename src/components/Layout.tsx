@@ -1,5 +1,5 @@
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import EventNotification from "./EventNotification";
@@ -9,6 +9,8 @@ import TestimonialSection from "./TestimonialSection";
 
 const Layout = () => {
   const { currentEvent } = useEventContext();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -18,7 +20,7 @@ const Layout = () => {
       <main className="flex-1">
         <Outlet />
       </main>
-      <TestimonialSection />
+      {isHomePage && <TestimonialSection />}
       <Footer />
     </div>
   );

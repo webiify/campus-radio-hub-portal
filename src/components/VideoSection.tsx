@@ -172,13 +172,13 @@ const VideoSection = () => {
                   <TabsTrigger value="alumni-introductions" className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700">Alumni Introductions</TabsTrigger>
                 </TabsList>
                 
-                <TabsContent value={activeCategory}>
+                <TabsContent value={activeCategory} className="mt-6">
                   <motion.div
                     variants={container}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid gap-8 md:grid-cols-3 mt-6"
+                    className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
                   >
                     {filteredVideos.map((video) => (
                       <motion.div
@@ -213,7 +213,7 @@ const VideoSection = () => {
                               </motion.div>
                             </div>
                           </div>
-                          <div className="flex flex-col flex-grow p-6">
+                          <div className="flex flex-col flex-grow p-6 bg-gradient-to-b from-white to-indigo-50 dark:from-gray-800 dark:to-gray-900">
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white">{video.title}</h3>
                             <p className="mt-2 text-gray-600 dark:text-gray-400 flex-grow">{video.description}</p>
                             <motion.button

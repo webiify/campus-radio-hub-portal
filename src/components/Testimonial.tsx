@@ -17,12 +17,12 @@ const Testimonial = ({ quote, author, position, image }: TestimonialProps) => {
       transition={{ duration: 0.6 }}
       className="flex flex-col h-full"
     >
-      <div className="flex flex-1 flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+      <div className="flex flex-1 flex-col rounded-xl border border-indigo-200 bg-white p-6 shadow-md backdrop-blur-sm dark:border-indigo-700/30 dark:bg-gray-800/80">
         <div className="mb-4 flex">
           {[1, 2, 3, 4, 5].map((star) => (
             <svg
               key={star}
-              className="h-5 w-5 text-yellow-400"
+              className="h-5 w-5 text-indigo-400"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -38,16 +38,16 @@ const Testimonial = ({ quote, author, position, image }: TestimonialProps) => {
             <img
               src={image}
               alt={author}
-              className="mr-4 h-10 w-10 rounded-full object-cover"
+              className="mr-4 h-10 w-10 rounded-full object-cover border-2 border-indigo-300 dark:border-indigo-600"
             />
           ) : (
-            <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-500 text-white">
+            <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 text-white">
               {author.charAt(0)}
             </div>
           )}
           <div>
             <h4 className="font-semibold text-gray-800 dark:text-gray-100">{author}</h4>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{position}</p>
+            <p className="text-sm text-indigo-500 dark:text-indigo-400">{position}</p>
           </div>
         </div>
       </div>
