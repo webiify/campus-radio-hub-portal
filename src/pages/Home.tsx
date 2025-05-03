@@ -7,48 +7,15 @@ import { format } from "date-fns";
 import VideoSection from "@/components/VideoSection";
 import { motion } from "framer-motion";
 import EventMarquee from "@/components/EventMarquee";
-import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 
 const Home = () => {
   const { events } = useEventContext();
-  const [date, setDate] = useState<Date | undefined>(new Date());
   
   // Get the most recent upcoming event
   const upcomingEvent = events
     .filter(event => new Date(event.date) >= new Date())
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0];
-
-  // Additional events for the events section
-  const additionalEvents = [
-    {
-      id: "event-1",
-      title: "Photography Workshop",
-      date: "2025-05-15",
-      description: "Learn advanced photography techniques from industry experts",
-      location: "Media Lab, Block B",
-      time: "2:00 PM"
-    },
-    {
-      id: "event-2",
-      title: "Radio Broadcasting Competition",
-      date: "2025-05-20",
-      description: "Show your talent in live radio broadcasting",
-      location: "Studio Room, Main Building",
-      time: "10:00 AM"
-    },
-    {
-      id: "event-3",
-      title: "Campus Film Festival",
-      date: "2025-06-10",
-      description: "Annual film festival showcasing student productions",
-      location: "College Auditorium",
-      time: "5:00 PM"
-    }
-  ];
-
-  // Combine with existing events
-  const allEvents = [...events, ...additionalEvents];
 
   // Functions for opening PDFs
   const openBrochure = () => {
@@ -205,85 +172,9 @@ const Home = () => {
                 </div>
               </div>
             </motion.div>
-
-            {/* Additional Events Section */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6 text-center text-emerald-700 dark:text-emerald-400">More Upcoming Events</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                {additionalEvents.map(event => (
-                  <motion.div 
-                    key={event.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  >
-                    <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all">
-                      <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
-                      <CardContent className="p-6">
-                        <h3 className="text-lg font-bold mb-2 text-emerald-700 dark:text-emerald-400">{event.title}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                          {format(new Date(event.date), "MMMM dd, yyyy")} • {event.time}
-                        </p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{event.description}</p>
-                        <p className="text-xs text-emerald-600 dark:text-emerald-500 font-medium">
-                          {event.location}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
       )}
-
-      {/* Events Calendar Section */}
-      <section className="bg-emerald-50 dark:bg-emerald-900/20 py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Events Calendar</h2>
-            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Stay up to date with our upcoming events and revisit our past activities
-            </p>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
-          >
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="pointer-events-auto mx-auto"
-              initialFocus
-            />
-            <div className="mt-4 pt-4 border-t border-dashed border-emerald-200 dark:border-emerald-800">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
-                <span className="text-sm text-gray-700 dark:text-gray-300">Club Events</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-teal-400"></div>
-                <span className="text-sm text-gray-700 dark:text-gray-300">Workshops</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Video Section */}
       <VideoSection />

@@ -2,16 +2,49 @@
 import React, { useState, useEffect } from 'react';
 import { useEventContext } from '../context/EventContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CalendarIcon, MapPinIcon } from 'lucide-react';
+import { CalendarIcon, MapPinIcon, FileTextIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
+import { Calendar } from "@/components/ui/calendar";
 
 const Events = () => {
   const { events, fetchEvents } = useEventContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  // Additional events for the events section
+  const additionalEvents = [
+    {
+      id: "event-1",
+      title: "Photography Workshop",
+      date: "2025-05-15",
+      description: "Learn advanced photography techniques from industry experts",
+      location: "Media Lab, Block B",
+      time: "2:00 PM"
+    },
+    {
+      id: "event-2",
+      title: "Radio Broadcasting Competition",
+      date: "2025-05-20",
+      description: "Show your talent in live radio broadcasting",
+      location: "Studio Room, Main Building",
+      time: "10:00 AM"
+    },
+    {
+      id: "event-3",
+      title: "Campus Film Festival",
+      date: "2025-06-10",
+      description: "Annual film festival showcasing student productions",
+      location: "College Auditorium",
+      time: "5:00 PM"
+    }
+  ];
+
+  // Combine with existing events
+  const allEvents = [...events, ...additionalEvents];
 
   useEffect(() => {
     const loadEvents = async () => {
@@ -43,6 +76,13 @@ const Events = () => {
   const item = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300 } }
+  };
+
+  // Function to open PDF notices
+  const openPdfNotice = (eventId: string) => {
+    // In a real app, this would open the actual PDF
+    alert(`Opening event ${eventId} notice in PDF!`);
+    // window.open(`/notices/event-${eventId}.pdf`, "_blank");
   };
 
   if (loading) {
@@ -99,7 +139,95 @@ const Events = () => {
         <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">Upcoming Events</h1>
         <div className="h-1 w-24 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
       </motion.div>
+
+      {/* Events Calendar Section */}
+      <section className="bg-emerald-50 dark:bg-emerald-900/20 py-16 mb-16 rounded-xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Events Calendar</h2>
+            <div className="mt-2 h-1 w-20 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Stay up to date with our upcoming events and revisit our past activities
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
+          >
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="pointer-events-auto mx-auto"
+              initialFocus
+            />
+            <div className="mt-4 pt-4 border-t border-dashed border-emerald-200 dark:border-emerald-800">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="h-3 w-3 rounded-full bg-emerald-500"></div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Club Events</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-3 w-3 rounded-full bg-teal-400"></div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Workshops</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
       
+      {/* More Upcoming Events Section */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold mb-6 text-center text-emerald-700 dark:text-emerald-400">More Upcoming Events</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {additionalEvents.map(event => (
+            <motion.div 
+              key={event.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <Card className="h-full overflow-hidden border-none shadow-lg hover:shadow-xl transition-all">
+                <div className="h-2 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold mb-2 text-emerald-700 dark:text-emerald-400">{event.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    {format(new Date(event.date), "MMMM dd, yyyy")} • {event.time}
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{event.description}</p>
+                  <p className="text-xs text-emerald-600 dark:text-emerald-500 font-medium mb-3">
+                    {event.location}
+                  </p>
+                  <div className="flex justify-end">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-xs flex items-center gap-1 border-emerald-500 text-emerald-700 hover:bg-emerald-50"
+                      onClick={() => openPdfNotice(event.id)}
+                    >
+                      <FileTextIcon className="h-3 w-3" />
+                      View Notice
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+      
+      {/* Regular Events List */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -124,11 +252,24 @@ const Events = () => {
                 </div>
                 <div className="flex justify-between items-center mt-4 pt-3 border-t border-dashed border-emerald-100 dark:border-emerald-800">
                   <span className="text-sm text-gray-600 dark:text-gray-400">Time: {event.time}</span>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button asChild variant="default" size="sm" className="bg-emerald-500 hover:bg-emerald-600 text-white">
-                      <Link to="/events">View Details</Link>
-                    </Button>
-                  </motion.div>
+                  <div className="flex gap-2">
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="text-xs flex items-center gap-1 border-emerald-500 text-emerald-700 hover:bg-emerald-50"
+                        onClick={() => openPdfNotice(event.id)}
+                      >
+                        <FileTextIcon className="h-3 w-3" />
+                        Notice
+                      </Button>
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <Button asChild variant="default" size="sm" className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs">
+                        <Link to={`/events/${event.id}`}>Details</Link>
+                      </Button>
+                    </motion.div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
